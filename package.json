@@ -5,7 +5,7 @@
   "main": "build/app.js",
   "scripts": {
     "build-ts": "tsc",
-    "prestart": "npm run build-ts | npm run html",
+    "postinstall": "npm run build-ts | npm run html",
     "start": "npm run serve",
     "serve": "node build/app.js",
     "html": "copyfiles -u 1 app/**/*.html app/**/*.css build/"
