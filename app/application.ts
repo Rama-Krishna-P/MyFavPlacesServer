@@ -18,7 +18,7 @@ export class Application {
         this.setupRoutes();
 
         
-        let portNo = 3000;
+        let portNo = process.env.PORT;
 
         this.app.listen(portNo, function() {
             console.log(`App listening on ${portNo}`);
