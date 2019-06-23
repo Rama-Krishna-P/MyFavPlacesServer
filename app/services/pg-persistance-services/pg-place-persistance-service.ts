@@ -11,10 +11,9 @@ export class PGPlacePersistanceService extends PGPersistanceService implements P
     async getAllPlaces(folderId: number): Promise<string> {
         try {
             let result: QueryResult = await super.executeQuery(`
-            Select opt::jsonb as places
+            Select COALESCE(jsonb_agg(opt)::jsonb, '[]'::jsonb) as places
             from folders, jsonb_array_elements(folders.places #> '{places}') WITH ORDINALITY arr(opt, ord) where folders.id = ${folderId};`);
-
-            return JSON.stringify(result.rows);
+            return JSON.stringify(result.rows[0].places);
         } catch (error) {
             throw error;
         }

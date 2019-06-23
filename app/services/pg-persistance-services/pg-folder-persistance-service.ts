@@ -12,7 +12,7 @@ export class PGFolderPersistanceService extends PGPersistanceService implements 
 
     async getAllFolders(): Promise<string> {
         try {
-            const result = await super.executeQuery('select id, name from folders');
+            const result = await super.executeQuery('select id, name from folders order by id');
             return JSON.stringify(result.rows);
         }
         catch (err) {
@@ -22,7 +22,7 @@ export class PGFolderPersistanceService extends PGPersistanceService implements 
 
     async createFolder(folder: Folder): Promise<string> {
         try {
-            const result = await super.executeQuery(`insert into folders (name, places) values ('${folder.name}', '${JSON.stringify(folder.places)}') RETURNING id`);
+            const result = await super.executeQuery(`insert into folders (name, places) values ('${folder.name}', '${JSON.stringify({places: folder.places})}') RETURNING id`);
             folder.id = result.rows[0].id;
             return JSON.stringify(folder);
         }
