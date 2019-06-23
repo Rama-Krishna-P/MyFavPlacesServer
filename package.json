@@ -8,7 +8,7 @@
     "postinstall": "npm run build-ts | npm run html",
     "start": "npm run serve",
     "serve": "node build/app.js",
-    "html": "copyfiles -u 1 app/**/*.html app/**/*.css build/"
+    "html": "copyfiles -u 1 app/**/*.html app/**/*.css app/**/*.js app/**/*.jpg build/"
   },
   "author": "",
   "license": "ISC",

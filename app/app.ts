@@ -7,7 +7,7 @@ import { PGFolderPersistanceService } from "./services/pg-persistance-services/p
 import { PlaceController } from "./controllers/placeController";
 import { PGPlacePersistanceService } from "./services/pg-persistance-services/pg-place-persistance-service";
 
-const pgConnString : string = 'postgres://postgres:password1@localhost:5432/MyFavPlaces';
+const pgConnString : string = process.env.DATABASE_URL || 'postgres://postgres:password1@localhost:5432/MyFavPlaces';
 
 const app : Application = new Application({
     controllers: [new folderController(new PGFolderPersistanceService(pgConnString)),
