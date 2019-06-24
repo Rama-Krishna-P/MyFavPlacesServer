@@ -26,7 +26,7 @@ export class PGPlacePersistanceService extends PGPersistanceService implements P
             Set places = jsonb_set(f.places, '{places}', val, false)
             from folders f1, LATERAL (
                 Select COALESCE(jsonb_agg(opt) || '${JSON.stringify(place)}'::jsonb, '[${JSON.stringify(place)}]'::jsonb) as val
-                FROM folders,  jsonb_array_elements(folders.places #> '{places}') WITH ORDINALITY arr(opt, ord)) opt 
+                FROM folders,  jsonb_array_elements(folders.places #> '{places}') WITH ORDINALITY arr(opt, ord) where folders.id = ${folderId}) opt 
             where f.id = ${folderId};`);
 
             return JSON.stringify(place);
