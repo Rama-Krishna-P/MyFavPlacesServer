@@ -5,9 +5,10 @@ import express from "express";
 export class WebAppController implements Controller {
     setupRoutes(app: express.Application): void {
         app.get('/', this.getWebApp);
+        app.get('/home', this.getWebApp);
     }
 
     private getWebApp(request: Request, response: Response) {
-        response.sendFile('firstPage.html', { root: __dirname + '/../public' });
+        response.sendFile('index.html', { root: __dirname + '/../public' });
     }
 }
