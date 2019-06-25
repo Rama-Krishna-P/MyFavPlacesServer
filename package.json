@@ -4,23 +4,33 @@
   "description": "",
   "main": "build/app.js",
   "scripts": {
-    "build-ts": "tsc",
-    "postinstall": "npm run build-ts | npm run html",
+    "build": "tsc -p .",
+    "postinstall": "npm run build | npm run html",
     "start": "npm run serve",
     "serve": "node build/app.js",
-    "html": "copyfiles -u 1 app/**/*.html app/**/*.css app/**/*.js app/**/*.jpg build/"
+    "html": "copyfiles -u 1 app/**/*.html app/**/*.css app/**/*.js app/**/*.jpg build/",
+    "dev": "set NODE_ENV=dev && set JSON_KEY=secret && set JWT_TIMEOUT=180000 && nodemon app/app.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^7.11.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cors": "^2.8.5",
     "@types/express": "^4.17.0",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/node": "^12.0.10",
     "@types/pg": "^7.4.14",
     "copyfiles": "^2.1.0",
+    "cors": "^2.8.5",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   }
 }

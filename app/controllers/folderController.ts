@@ -3,6 +3,7 @@ import Express from "express";
 import { Controller } from "../interfaces/controller";
 import { FolderPersistanceService } from "../interfaces/services/folder-persistance-service";
 import { ControllerBase } from "./controller-base";
+import { Authorize } from "../middleware/jwtAuthorizer";
 
 export class folderController extends ControllerBase implements Controller {
     private _service: FolderPersistanceService;
@@ -13,13 +14,13 @@ export class folderController extends ControllerBase implements Controller {
     }
 
     setupRoutes(app: Express.Application): void {
-        app.get('/folders', this.getAllFolders.bind(this));
-        app.post('/folder', this.addNewFolder.bind(this));
-        app.put('/folder', this.updateFolder.bind(this));
-        app.delete('/folder/:folderId', this.deleteFolder.bind(this));
+        app.get('/folders', Authorize, this.getAllFolders.bind(this));
+        app.post('/folder', Authorize, this.addNewFolder.bind(this));
+        app.put('/folder', Authorize, this.updateFolder.bind(this));
+        app.delete('/folder/:folderId', Authorize, this.deleteFolder.bind(this));
     }
 
-    private getAllFolders(req: Request, res: Response) {
+    private getAllFolders(req: any, res: Response) {
         super.handleRequest(req, res, (() => {
             return this._service.getAllFolders();
         }).bind(this));

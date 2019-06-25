@@ -2,6 +2,7 @@ import Express from "express";
 import path from "path";
 import { AppConfiguration } from "./interfaces/app-configuration";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 export class Application {
 
@@ -14,13 +15,21 @@ export class Application {
 
     startApp() {
         this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+
+        if (process.env.NODE_ENV) {
+            this.app.use(cors({
+                exposedHeaders : "authorization"
+            }));
+        }
+
         this.registerHandlers();
         this.setupRoutes();
 
-        
+
         let portNo = process.env.PORT || 3000;
 
-        this.app.listen(portNo, function() {
+        this.app.listen(portNo, function () {
             console.log(`App listening on ${portNo}`);
         });
     }
