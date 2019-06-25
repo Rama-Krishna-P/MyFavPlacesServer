@@ -2,7 +2,6 @@ import Express from "express";
 import path from "path";
 import { AppConfiguration } from "./interfaces/app-configuration";
 import bodyParser from "body-parser";
-import cors from "cors";
 
 export class Application {
 
@@ -18,6 +17,7 @@ export class Application {
         this.app.use(bodyParser.urlencoded({ extended: true }));
 
         if (process.env.NODE_ENV) {
+            const cors = require('cors');
             this.app.use(cors({
                 exposedHeaders : "authorization"
             }));

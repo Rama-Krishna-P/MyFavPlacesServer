@@ -10,8 +10,6 @@ import { SignInController } from "./controllers/signInController";
 
 const pgConnString : string = process.env.DATABASE_URL || 'postgres://postgres:password1@localhost:5432/MyFavPlaces';
 
-console.log('Starting app');
-
 const app : Application = new Application({
     controllers: [new SignInController(),
                   new folderController(new PGFolderPersistanceService(pgConnString)),
