@@ -16,12 +16,12 @@ export class Application {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
 
-        if (process.env.NODE_ENV) {
-            const cors = require('cors');
-            this.app.use(cors({
-                exposedHeaders : "authorization"
-            }));
-        }
+        // if (process.env.NODE_ENV) {
+        //     const cors = require('cors');
+        //     this.app.use(cors({
+        //         exposedHeaders : "authorization"
+        //     }));
+        // }
 
         this.registerHandlers();
         this.setupRoutes();

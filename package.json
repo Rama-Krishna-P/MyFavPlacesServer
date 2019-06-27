@@ -9,7 +9,7 @@
     "start": "npm run serve",
     "serve": "node build/app.js",
     "html": "copyfiles -u 1 app/**/*.html app/**/*.css app/**/*.js app/**/*.jpg build/",
-    "dev": "set NODE_ENV=dev && set JSON_KEY=secret && set JWT_TIMEOUT=180000 && nodemon app/app.ts"
+    "dev": "npm run html && set NODE_ENV=dev && set JSON_KEY=secret && set JWT_TIMEOUT=180000 && nodemon app/app.ts"
   },
   "author": "",
   "license": "ISC",
